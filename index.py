@@ -1,13 +1,16 @@
 import streamlit as st
 
 from router import router, navigate
-from utils import query_db
 from login import login_required
 
 @router(path="/")
 def render():
-    st.write("This is index page.")
-    st.button("Go to Details Page", on_click=navigate(path="/details", args={ "id": "test" }))
+    # only for demo purpose
+    import demo
+    st.button("Go to Demo Page", on_click=navigate(path="/demo", args={ "id": "A-Demo-ID" }))
+
+    st.markdown("# This is the book searching page.")
+    st.button(f"Read More About Book: Test Book 1", on_click=navigate(path="/details", args={ "isbn": "2841029523" }))
 
 if __name__ == "__main__":
     render()

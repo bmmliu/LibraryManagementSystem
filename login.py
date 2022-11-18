@@ -24,6 +24,7 @@ def login_required(func):
         if "password_incorrect" in st.session_state:
             st.error("😕 Password incorrect")
 
+        st.markdown("# Please login to continue:")
         st.text_input("Username", type="default", key="username")
         st.text_input("Password", type="password", key="password")
         st.button("Login", on_click=password_entered)

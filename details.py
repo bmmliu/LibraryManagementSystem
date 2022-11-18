@@ -9,7 +9,7 @@ from login import login_required
 def render():
     st.markdown("# Book Details")
     st.markdown("This is details page.")
-    st.write("Args: id=" + st.session_state["args"]["id"])
+    st.write("Args: isbn=" + st.session_state["args"]["isbn"])
 
 
 if __name__ == "__main__":

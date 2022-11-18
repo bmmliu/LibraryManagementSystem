@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-from router import router, args, navigate
+from router import router, args
 from utils import query_db, exec_db
 from login import login_required
 
@@ -72,9 +72,7 @@ def render():
                 
                 option = st.selectbox('Which library do you want to borrow the book from?', list(libraries), format_func=lambda x: f"{x[0]} - {x[1]}")
                 st.button(f"Borrow from {option[0]}", type="primary", disabled=(not option), on_click=lambda: borrow_book(option[0], option[1], isbn))
-    
-    st.markdown("<hr />", unsafe_allow_html=True)
-    st.button("⬅ Back to Search", on_click=navigate(path="/"))
+
 
 if __name__ == "__main__":
     render()

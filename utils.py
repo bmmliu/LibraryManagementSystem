@@ -3,6 +3,10 @@ import psycopg2
 
 import streamlit as st
 
+def wipe_state(state=""):
+    if state in st.session_state:
+        del st.session_state[state]
+
 @st.cache
 def get_config(filename="local.ini", section="postgresql"):
     parser = ConfigParser()
@@ -26,3 +30,8 @@ def query_db(sql: str):
 
     df = pd.DataFrame(data=data, columns=column_names)
     return df
+
+def init_state(states={}):
+    for k in states:
+        if k not in st.session_state:
+            st.session_state[k] = states[k]

@@ -1,6 +1,7 @@
 import pandas as pd
 import psycopg2
 
+from configparser import ConfigParser
 import streamlit as st
 
 def wipe_state(state=""):
@@ -13,8 +14,22 @@ def get_config(filename="local.ini", section="postgresql"):
     parser.read(filename)
     return {k: v for k, v in parser.items(section)}
 
-@st.cache
+def exec_db(sql: str):
+    print("Do Query:", sql)
+
+    db_info = get_config()
+    conn = psycopg2.connect(**db_info)
+
+    cur = conn.cursor()
+    cur.execute(sql)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
 def query_db(sql: str):
+    print("Do Query:", sql)
+
     db_info = get_config()
     conn = psycopg2.connect(**db_info)
 

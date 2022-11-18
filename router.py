@@ -19,6 +19,7 @@ def init():
     init_state({
         "current_path": "/",
         "path_args": {},
+        "logined_user": 124123,
     })
 
 def handle():
@@ -40,6 +41,11 @@ def handle():
         except Exception as e:
             print("Unexpected Error:", e)
 
+def args(name="", default=""):
+    if name not in st.session_state["args"]:
+        return default
+    return st.session_state["args"][name]
+
 # navigate to a page, return a callback function
 # you can pass in path and argument to the handler
 def navigate(path="/", args={}):
@@ -47,5 +53,4 @@ def navigate(path="/", args={}):
         st.session_state["current_path"] = path
         st.session_state["path_args"][path] = args
     return wrapper
-
 

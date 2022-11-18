@@ -1,6 +1,6 @@
 import streamlit as st
 
-from router import router
+from router import router, args
 from utils import query_db
 from login import login_required
 
@@ -8,7 +8,7 @@ from login import login_required
 @login_required
 def render():
     "## Read tables"
-    st.markdown("# Args: id=" + st.session_state["args"]["id"])
+    st.markdown("# Args: id=" + args("id"))
 
     sql_all_table_names = "SELECT relname FROM pg_class WHERE relkind='r' AND relname !~ '^(pg_|sql_)';"
     try:

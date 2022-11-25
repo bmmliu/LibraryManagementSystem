@@ -3,3 +3,4 @@ local.ini
 __pycache__
 database.json
 database.sql
+run.sh

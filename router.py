@@ -23,7 +23,7 @@ def init():
     init_state({
         "current_path": "/",
         "path_args": {},
-        "logined_user": 124123,
+        "logined_user": 4820394710,
     })
 
 def handle():

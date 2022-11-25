@@ -158,7 +158,7 @@ def irun(table, cols, extra=""):
         values = ",".join(values)
         sql = f"INSERT INTO {table} ({keys}) VALUES ({values}) " + extra
         cur.execute(sql)
-        COMMIT_LOGS.append(sql)
+        COMMIT_LOGS.append(sql.strip()+";")
         i += 1
 
     print(f"Committing {table}: {len(cols)} ...")

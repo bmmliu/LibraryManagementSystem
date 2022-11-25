@@ -1,3 +1,5 @@
 local.ini
 .DS_Store
 __pycache__
+database.json
+database.sql

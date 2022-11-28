@@ -10,6 +10,7 @@ def render():
     import demo
     st.button("Go to Demo Page", on_click=navigate(path="/demo", args={ "id": "A-Demo-ID" }))
     st.button("Go to Statstics Page", on_click=navigate(path="/stats"))
+    st.button("👥 User Profile", on_click=navigate(path="/user"))
 
     st.markdown("# This is the book searching page.")
 
@@ -65,8 +66,21 @@ def render():
                 "Sorry! Something went wrong with your query, please try again."
             )
 
+    "## Search by isbn"
+    st.markdown("### 🔍️ Search by isbn")
+    isbn_entered = st.text_input(
+        "Enter book isbn 👇",
+        placeholder="enter isbn of the book",
+    )
+
+    if isbn_entered:
+        all_books_selected = query_db(f"SELECT title, isbn, publisher_name, description FROM books WHERE isbn = '{isbn_entered}';")
+        isbn_list.extend(all_books_selected["isbn"].tolist())
+        df = all_books_selected
+        st.dataframe(df)
+
     "## Select book"
-    st.markdown("### 🔍️ Select book by isbn")
+    st.markdown("### ✅ Select book by isbn")
     if author_selected or title_selected:
         isbn_list = list(set(isbn_list))
         isbn_selected = st.selectbox("Choose the isbn listed", isbn_list)

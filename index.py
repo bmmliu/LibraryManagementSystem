@@ -8,6 +8,8 @@ from login import login_required
 @login_required
 def render():
     role = st.session_state["logined_user_role"]
+    st.markdown("# Welcome to library system")
+
     if role == 0:
         col1, col2, col3 = st.columns(3)
         col1.button("📈 Statistics Page", on_click=navigate(path="/stats"))
@@ -17,8 +19,6 @@ def render():
         col1, col2 = st.columns(2)
         col1.button("📈 Statistics Page", on_click=navigate(path="/stats"))
         col2.button("👥 Profile Page", on_click=navigate(path="/user"))
-
-    st.markdown("# Welcome to library system")
 
     isbn_list = []
     searchBy = st.selectbox("Search By", ["Book Title", "Author Name", "ISBN"])

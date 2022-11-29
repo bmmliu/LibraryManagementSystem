@@ -181,6 +181,13 @@ irun("people", [{
     "first_name": "demo",
     "last_name": "demo",
     "role": 0,
+}, {
+    "ssn": 5819283842,
+    "username": "bob",
+    "password": hashlib.md5("bob".encode()).hexdigest(),
+    "first_name": "bob",
+    "last_name": "bob",
+    "role": 1,
 }])
 
 irun("libraries", [{

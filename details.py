@@ -81,7 +81,3 @@ def render():
                 
                 option = st.selectbox('Which library do you want to borrow the book from?', list(libraries), format_func=lambda x: f"{x[1]} - {x[2]}")
                 st.button(f"Borrow from {option[0]}", type="primary", disabled=(not option), on_click=lambda: borrow_book(option[0], option[2], isbn))
-
-
-if __name__ == "__main__":
-    render()

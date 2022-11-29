@@ -12,9 +12,11 @@ def login_required(func):
             # use admin and nimda as username / password first, may check in database later
             username = st.session_state["username"].replace("'", "")
             password = hashlib.md5(st.session_state["password"].encode()).hexdigest()
-            user = query_db(f"SELECT ssn FROM people WHERE username='{username}' AND password='{password}'")
+            user = query_db(f"SELECT ssn, role, username FROM people WHERE username='{username}' AND password='{password}'")
             if not user.empty:
                 st.session_state["logined_user"] = user.loc[0]['ssn']
+                st.session_state["logined_user_role"] = user.loc[0]['role']
+                st.session_state["logined_user_username"] = user.loc[0]['username']
             else:
                 st.session_state["password_incorrect"] = True
 
@@ -29,7 +31,8 @@ def login_required(func):
             st.error("😕 Password incorrect")
 
         st.markdown("# Please login to continue:")
-        st.markdown("> You can use **username**: `demo` and **password**: `demo` to login:")
+        st.markdown("> You can use **username**: `demo` and **password**: `demo` to login as manager:")
+        st.markdown("> Or **username**: `bob` and **password**: `bob` to login as normal user:")
         st.text_input("Username", type="default", key="username")
         st.text_input("Password", type="password", key="password")
         st.button("Login", on_click=password_entered)
